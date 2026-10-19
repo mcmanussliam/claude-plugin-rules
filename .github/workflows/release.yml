@@ -40,5 +40,5 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: npm install --global npm@latest
       - run: npm ci
-      - run: npm install --global @anthropic-ai/claude-code@2.1.303
+      - run: npm install --global @anthropic-ai/claude-code@2.1.303 --allow-scripts=@anthropic-ai/claude-code
       - run: npm publish --provenance --access public

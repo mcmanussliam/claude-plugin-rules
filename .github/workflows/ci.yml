@@ -28,7 +28,7 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci
-      - run: npm install --global @anthropic-ai/claude-code@2.1.303
+      - run: npm install --global @anthropic-ai/claude-code@2.1.303 --allow-scripts=@anthropic-ai/claude-code
       - run: npm run typecheck
       - run: npm run validate
       - run: npm run build
