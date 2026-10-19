@@ -29,4 +29,4 @@ jobs:
       - run: npm install --global npm@latest
       - run: npm ci
       - run: npm install --global @anthropic-ai/claude-code@2.1.303 --allow-scripts=@anthropic-ai/claude-code
-      - run: npm stage publish
+      - run: NPM_CONFIG_USERCONFIG=/dev/null npm stage publish
