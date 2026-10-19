@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["es2023"],
+    "types": [],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  // .claude-plugin/types is where Claude Code writes the plugin API's declarations
+  // when it loads this plugin; ../../types is this repo's copy of them
+  "include": [".claude-plugin/types", "../../types", "src"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "team-conventions",
+  "version": "0.1.0",
+  "description": "Our team's coding conventions as rules: always-on, path-scoped, per-stack and switchable.",
+  "author": { "name": "Your Team" }
+}

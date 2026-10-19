@@ -1,0 +1,4 @@
+{
+  "description": "Loads the team's conventions as rules",
+  "modules": ["../dist/index.js"]
+}

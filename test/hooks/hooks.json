@@ -1,0 +1,4 @@
+{
+  "description": "Fixtures",
+  "modules": ["../dist/index.js"]
+}

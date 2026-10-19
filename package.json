@@ -1,0 +1,61 @@
+{
+  "name": "claude-plugin-rules",
+  "version": "0.0.0",
+  "description": "Rules for Claude Code plugins.",
+  "keywords": [
+    "claude",
+    "claude-code",
+    "claude-code-plugin",
+    "function-hooks",
+    "rules",
+    "ai",
+    "agents"
+  ],
+  "homepage": "https://github.com/mcmanussliam/claude-plugin-rules#readme",
+  "bugs": {
+    "url": "https://github.com/mcmanussliam/claude-plugin-rules/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcmanussliam/claude-plugin-rules.git"
+  },
+  "license": "MIT",
+  "author": "Liam",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "esbuild src/index.ts --bundle --format=esm --platform=neutral --packages=external --outfile=dist/index.js && tsc -p tsconfig.build.json",
+    "test": "npm run test:unit && npm run test:consumer",
+    "test:unit": "vitest run",
+    "test:consumer": "esbuild test/consumer/plugin.ts --bundle --format=esm --platform=neutral --main-fields=module,main --outfile=test/dist/index.js && CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1 claude plugin test test",
+    "validate": "npm test && claude plugin validate test/.claude-plugin/plugin.json",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "dependencies": {
+    "minimatch": "10.2.6",
+    "yaml": "2.9.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "typescript": "=6.0.3",
+    "vitest": "3.2.7"
+  }
+}

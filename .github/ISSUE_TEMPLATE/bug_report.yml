@@ -1,0 +1,70 @@
+name: Bug report
+description: Something isn't working as documented.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please search the existing issues first.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you saw, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The smallest setup that shows it. Include your `rules(...)` call and the rule files involved (or their frontmatter).
+      placeholder: |
+        1. rules(on, ({ plugin }) => [{ dir: `${plugin.root}/rules` }])
+        2. A rule with `paths: ["src/**/*.ts"]`
+        3. Read src/app.ts
+        4. ...
+    validations:
+      required: true
+  - type: input
+    id: package-version
+    attributes:
+      label: claude-plugin-rules version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: claude-code-version
+    attributes:
+      label: Claude Code version
+      description: The output of `claude --version`.
+      placeholder: "2.1.303 (Claude Code)"
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where does it happen?
+      multiple: true
+      options:
+        - Main conversation
+        - Subagent
+        - After compaction or /clear
+        - The /<plugin>-rules command
+        - Loading the plugin (module refused)
+        - Other
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Anything relevant from `claude --debug`, or from `claude plugin validate` on your plugin. This is rendered as code.
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: Function hooks are enabled (`CLAUDE_CODE_ENABLE_FUNCTION_HOOKS=1`).
+          required: true
+        - label: I searched the existing issues.
+          required: true
