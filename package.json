@@ -1,6 +1,6 @@
 {
   "name": "claude-plugin-rules",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Rules for Claude Code plugins.",
   "keywords": [
     "claude",
