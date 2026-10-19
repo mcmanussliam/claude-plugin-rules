@@ -1,10 +1,15 @@
-name: Stage package (one-off backfill)
+name: Publish package (one-off backfill)
+
+# Uses an NPM_TOKEN secret (granular access token with bypass 2FA) because
+# the package does not exist yet and OIDC trusted publishing cannot create it.
+# Delete this workflow after the first successful publish and switch to the
+# release.yml OIDC flow.
 
 on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Tag to stage
+        description: Tag to publish
         default: v1.0.0
         required: true
 
@@ -12,11 +17,10 @@ permissions:
   contents: read
 
 jobs:
-  stage:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,4 +33,6 @@ jobs:
       - run: npm install --global npm@latest
       - run: npm ci
       - run: npm install --global @anthropic-ai/claude-code@2.1.303 --allow-scripts=@anthropic-ai/claude-code
-      - run: NPM_CONFIG_USERCONFIG=/dev/null npm stage publish
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
