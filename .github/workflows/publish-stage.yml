@@ -1,0 +1,32 @@
+name: Stage package (one-off backfill)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag to stage
+        default: v1.0.0
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+      - run: npm install --global npm@latest
+      - run: npm ci
+      - run: npm install --global @anthropic-ai/claude-code@2.1.303 --allow-scripts=@anthropic-ai/claude-code
+      - run: npm stage publish
